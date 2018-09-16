@@ -20,7 +20,7 @@ public class ChangeStatus {
 	@DBRef(lazy=true)
 	private User userChange;
 	
-	private Date dateChageStatus;
+	private Date dateChangeStatus;
 	
 	private StatusEnum status;
 
@@ -48,12 +48,12 @@ public class ChangeStatus {
 		this.userChange = userChange;
 	}
 
-	public Date getDateChageStatus() {
-		return dateChageStatus;
+	public Date getDateChangeStatus() {
+		return dateChangeStatus;
 	}
 
-	public void setDateChageStatus(Date dateChageStatus) {
-		this.dateChageStatus = dateChageStatus;
+	public void setDateChangeStatus(Date dateChangeStatus) {
+		this.dateChangeStatus = dateChangeStatus;
 	}
 
 	public StatusEnum getStatus() {

@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 
 @Document
 public class Ticket {
@@ -37,6 +38,7 @@ public class Ticket {
 	
 	private String image;
 	
+	@Transient
 	private List<ChangeStatus> changes;
 
 	public String getId() {

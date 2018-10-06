@@ -16,7 +16,7 @@ import org.springframework.data.annotation.Transient;
 public class Ticket {
 
 	@Id
-	private String Id;
+	private String id;
 	
 	@DBRef(lazy=true)
 	private User user;
@@ -42,11 +42,11 @@ public class Ticket {
 	private List<ChangeStatus> changes;
 
 	public String getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(String id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public User getUser() {

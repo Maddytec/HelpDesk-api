@@ -49,7 +49,7 @@ public class TicketController {
 	@Autowired
 	private UserService userService;
 
-	@PostMapping()
+	@PostMapping
 	@PreAuthorize("hasAnyRole('CUSTOMER')")
 	public ResponseEntity<Response<Ticket>> createOuUpdate(HttpServletRequest request, @RequestBody Ticket ticket,
 			BindingResult result) {
@@ -93,7 +93,7 @@ public class TicketController {
 		return random.nextInt(9999);
 	}
 
-	@PutMapping()
+	@PutMapping
 	@PreAuthorize("hasAnyRole('CUSTOMER')")
 	public ResponseEntity<Response<Ticket>> update(HttpServletRequest request, @RequestBody Ticket ticket,
 			BindingResult result) {
@@ -183,19 +183,23 @@ public class TicketController {
 		User userRequest = userFromRequest(request);
 		if (userRequest.getProfile().equals(ProfileEnum.ROLE_TECHNICIAN)) {
 			tickets = ticketService.listTicket(page, count);
-		} else if (userRequest.getProfile().equals(ProfileEnum.ROLE_CUSTUMER)) {
+		} else if (userRequest.getProfile().equals(ProfileEnum.ROLE_CUSTOMER)) {
 			tickets = ticketService.findByCurrentUser(page, count, userRequest.getId());
 		}
 		response.setData(tickets);
 		return ResponseEntity.ok(response);
 	}
 
-	@GetMapping(value = "{page}/{count}/{number}/{title}/{status}/{priority}/{assigned}")
+	@GetMapping(value = "{page}/{count}/{number}/{title}/{status}/{priority}/{assigned}") 
 	@PreAuthorize("hasAnyRole('CUSTOMER', 'TECHNICIAN')")
 	public ResponseEntity<Response<Page<Ticket>>> findByParams(HttpServletRequest request,
-			@PathVariable("page") int page, @PathVariable("count") int count, @PathVariable("number") Integer number,
-			@PathVariable("title") String title, @PathVariable("status") String status,
-			@PathVariable("priority") String priority, @PathVariable("assigned") boolean assigned) {
+			@PathVariable("page") int page, 
+			@PathVariable("count") int count,
+			@PathVariable("number") Integer number,
+			@PathVariable("title") String title,
+			@PathVariable("status") String status,
+			@PathVariable("priority") String priority,
+			@PathVariable("assigned") boolean assigned) {
 
 		title = title.equals("uninformed") ? "" : title;
 		status = status.equals("uninformed") ? "" : status;
@@ -214,7 +218,7 @@ public class TicketController {
 				} else {
 					tickets = ticketService.findByParameters(page, count, title, status, priority);
 				}
-			} else if (userRequest.getProfile().equals(ProfileEnum.ROLE_CUSTUMER)) {
+			} else if (userRequest.getProfile().equals(ProfileEnum.ROLE_CUSTOMER)) {
 				tickets = ticketService.findByParametersAndCurrentUser(page, count, title, status, priority,
 						userRequest.getId());
 			}
@@ -266,8 +270,8 @@ public class TicketController {
 		}
 	}
 	
-	@GetMapping("/sumary")
-	public ResponseEntity<Response<Summary>> findSumary(){
+	@GetMapping("/summary")
+	public ResponseEntity<Response<Summary>> findSummary(){
 		Response<Summary> response = new Response<Summary>();
 		Summary summary = new Summary();
 		

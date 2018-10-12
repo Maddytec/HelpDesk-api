@@ -36,7 +36,7 @@ import br.com.maddytec.api.service.TicketService;
 import br.com.maddytec.api.service.UserService;
 
 @RestController
-@RequestMapping("/api/ticket")
+@RequestMapping(value = "api/ticket")
 @CrossOrigin(origins = "*")
 public class TicketController {
 

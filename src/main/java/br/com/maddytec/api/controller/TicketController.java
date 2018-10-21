@@ -299,7 +299,7 @@ public class TicketController {
 					amountApproved++;
 				}
 		
-				if(ticket.getStatus().equals(StatusEnum.Disaproved)) {
+				if(ticket.getStatus().equals(StatusEnum.Disapproved)) {
 					amountDisapproved++;
 				}
 		
